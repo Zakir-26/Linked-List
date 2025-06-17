@@ -22,6 +22,8 @@ void DeleteFirst(struct node **head);
 
 void DeleteLast(struct node **head);
 
+void reverseList(struct node **head);
+
 //....
 
 int main(void)
@@ -49,6 +51,18 @@ int main(void)
     printListItems(head);
 
     DeleteLast(&head);
+
+    printListItems(head);
+
+    insertBegin(&head, 101);
+
+    insertBegin(&head, 102);
+
+    insertBegin(&head, 103);
+
+    printListItems(head);
+
+    reverseList(&head);
 
     printListItems(head);
 
@@ -194,6 +208,43 @@ void DeleteLast(struct node **head)
         temp->next = NULL;
         free(temp2);
     }
+}
+
+//function to reverse a list
+
+void reverseList(struct node **head)
+{
+
+    struct node *prev, *curr, *next;
+
+    prev = NULL;
+    next = NULL;
+    curr = *head;
+
+    if (*head == NULL)
+    {
+        printf("List is empty.\n");
+    }
+
+    else if  ((*head)-> next == NULL)
+    {
+        printf("Add some more nodes to reverse the list.\n");
+    }
+
+    else 
+    {
+        while (curr != NULL)
+        {
+            next = curr->next;
+            curr->next = prev;
+
+            prev = curr;
+            curr = next;
+        }   
+
+    }
+
+    *head = prev;
 }
 
 //function to print list items
