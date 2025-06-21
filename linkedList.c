@@ -16,6 +16,8 @@ void insertEnd(struct node **head, int data);
 
 void printListItems(struct node *head);
 
+int count(struct node *head);
+
 void insertPos(struct node **head, int data, int pos);
 
 void DeleteFirst(struct node **head);
@@ -23,6 +25,8 @@ void DeleteFirst(struct node **head);
 void DeleteLast(struct node **head);
 
 void reverseList(struct node **head);
+
+void freeList(struct node **head);
 
 //....
 
@@ -46,6 +50,10 @@ int main(void)
 
     printListItems(head);
 
+    int elements = count(head);
+
+    printf("Total number of nodes in a list are: %d \n", elements);
+
     DeleteFirst(&head);
 
     printListItems(head);
@@ -65,6 +73,13 @@ int main(void)
     reverseList(&head);
 
     printListItems(head);
+
+    freeList(&head);
+
+    elements = count(head);
+
+    printf("Total number of nodes in a list are: %d \n", elements);
+
 
     return 0;
 }
@@ -210,6 +225,25 @@ void DeleteLast(struct node **head)
     }
 }
 
+// function to count number of nodes in a list...
+
+int count(struct node *head)
+{
+    struct node *temp = head;
+
+    int num = 0;
+
+    while(temp != NULL)
+    {
+        num++;
+        temp = temp->next;
+
+    }
+
+    return num;
+    
+
+}
 //function to reverse a list
 
 void reverseList(struct node **head)
@@ -260,3 +294,16 @@ void printListItems(struct node *head)
 
     printf("\n");
 }
+
+// Frees all nodes in the linked list to deallocate memory...
+
+void freeList(struct node **head)
+{
+    while ((*head) != NULL)
+    {
+        temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}
+
